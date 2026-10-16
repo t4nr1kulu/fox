@@ -17,9 +17,10 @@
             max-width: 800px;
             margin: 0 auto;
         }
-        .keyword { color: #569cd6; }
+        /* VS Code Renk Paleti */
+        .keyword { color: #569cd6; font-weight: bold; }
         .string { color: #ce9178; }
-        .comment { color: #6a9955; }
+        .comment { color: #6a9955; font-style: italic; }
         .function { color: #dcdcaa; }
         
         #typewriter {
@@ -82,6 +83,7 @@
         let currentChar = 0;
         let isTag = false;
         let tagContent = '';
+        let currentHTML = ''; // Renklerin bozulmasını engelleyen hafıza değişkeni
 
         function typeWriter() {
             if (currentLine < codeLines.length) {
@@ -102,7 +104,8 @@
                         tagContent += char;
                         if (char === '>') {
                             isTag = false;
-                            typewriterElement.innerHTML += tagContent;
+                            currentHTML += tagContent;
+                            typewriterElement.innerHTML = currentHTML;
                             tagContent = '';
                         }
                         currentChar++;
@@ -110,7 +113,8 @@
                         return;
                     }
 
-                    typewriterElement.innerHTML += char;
+                    currentHTML += char;
+                    typewriterElement.innerHTML = currentHTML;
                     currentChar++;
                     
                     let delay = Math.random() * 50 + 20; 
@@ -118,7 +122,8 @@
                     
                     setTimeout(typeWriter, delay);
                 } else {
-                    typewriterElement.innerHTML += '<br>';
+                    currentHTML += '<br>';
+                    typewriterElement.innerHTML = currentHTML;
                     currentLine++;
                     currentChar = 0;
                     setTimeout(typeWriter, 400);
