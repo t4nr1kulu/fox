@@ -4,10 +4,10 @@ def average(toplam,day):
 
 total=0
 
-for i in range(1,6):
+for i in range(5):
     ciro = float(input("enter your ciro"))
     total += ciro
-    
+
 print(average(total,5))
 
 
